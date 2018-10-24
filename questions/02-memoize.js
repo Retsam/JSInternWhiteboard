@@ -1,3 +1,3 @@
 module.exports = function memoize(func) {
-    return null;
+    return func;
 };

@@ -2,26 +2,27 @@ const memoize = require('../questions/02-memoize');
 const { it, assert, describe } = require('../tester');
 
 describe('memoize', () => {
-    it('should call a 0 arg function once', () => {
-        let haveCalled = false;
+    it('should call a function with no arguments once', () => {
+        let callCount = 0;
 
         const func = () => {
-            if (haveCalled) throw new Error('oops');
-            haveCalled = true;
+            callCount += 1;
         };
 
         const resultFunc = memoize(func);
 
         resultFunc();
         resultFunc();
+
+        assert.equal(callCount, 1);
     });
 
-    it('should remember the result from a 0 arg function', () => {
-        let value = 0;
+    it('should remember the result from a function with no arguments', () => {
+        let callCount = 0;
 
         const func = () => {
-            value = value + 1;
-            return value;
+            callCount += 1;
+            return callCount;
         };
 
         const memoizeFunc = memoize(func);
@@ -33,18 +34,18 @@ describe('memoize', () => {
         assert.equal(second, 1);
     });
 
-    it('should return a function that computes the result of another function', () => {
-        let i = 0;
-        const increment = x => {
-            i += x;
-            return i;
+    it('should return the correct result from memoized functions with arguments', () => {
+        let sum = 0;
+        const addToSum = x => {
+            sum += x;
+            return sum;
         };
 
-        const resultFunc = memoize(increment);
+        const memoizedAddToSum = memoize(addToSum);
 
-        const one = resultFunc(1);
-        const three = resultFunc(2);
-        const six = resultFunc(3);
+        const one = memoizedAddToSum(1);
+        const three = memoizedAddToSum(2);
+        const six = memoizedAddToSum(3);
 
         assert.equal(one, 1);
         assert.equal(three, 3);
@@ -52,18 +53,19 @@ describe('memoize', () => {
     });
 
     it('should return a function that computes the result of another function once per input value', () => {
-        let i = 0;
-        const increment = x => {
-            i += x;
-            return i;
+        let sum = 0;
+        const addToSum = x => {
+            sum += x;
+            return sum;
         };
 
-        const resultFunc = memoize(increment);
+        const memoizedAddToSum = memoize(addToSum);
 
-        const two = resultFunc(2);
-        const five = resultFunc(3);
-        const stillFive = resultFunc(3);
-        const stillTwo = resultFunc(2);
+        const two = memoizedAddToSum(2);
+        const five = memoizedAddToSum(3);
+
+        const stillFive = memoizedAddToSum(3);
+        const stillTwo = memoizedAddToSum(2);
 
         assert.equal(two, 2);
         assert.equal(five, 5);
