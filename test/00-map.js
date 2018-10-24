@@ -1,15 +1,11 @@
 const map = require('../questions/00-map');
-const {
-    it,
-    assert,
-    describe
-} = require('../tester');
+const { it, assert, describe } = require('../tester');
 
-const add1 = (x) => {
+const add1 = x => {
     return x + 1;
 };
 
-const parseNum = (x) => {
+const parseNum = x => {
     return parseInt(x);
 };
 

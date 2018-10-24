@@ -1,9 +1,13 @@
-const throwFalse = (thing) => { if (!thing) throw new Error('failed test'); };
+const throwFalse = thing => {
+    if (!thing) throw new Error('failed test');
+};
 
 const testMethods = {
-    all: (bools) => bools.reduce((r, v) => r && v, true),
-    arrayEqual: (arr1, arr2) => arr1.length === arr2.length && testMethods.all(arr1.map((v, i) => arr2[i] === v)),
-    equal: (thing1, thing2) => thing1 === thing2,
+    all: bools => bools.reduce((r, v) => r && v, true),
+    arrayEqual: (arr1, arr2) =>
+        arr1.length === arr2.length &&
+        testMethods.all(arr1.map((v, i) => arr2[i] === v)),
+    equal: (thing1, thing2) => thing1 === thing2
 };
 
 const assert = Object.keys(testMethods).reduce((collection, key) => {
@@ -15,20 +19,21 @@ const assert = Object.keys(testMethods).reduce((collection, key) => {
             e.got = args[0];
             throw e;
         }
-    }
+    };
     return collection;
 }, {});
 
-const tester = module.exports = {
+const tester = (module.exports = {
     assert,
     testMethods,
     it: (msg, func) => {
         try {
             func();
             console.log('PASS:', msg, '\n');
-        } catch(e) {
+        } catch (e) {
             console.error('FAIL:', msg);
-            if (e.expected !== undefined) console.error('expected:', e.expected, 'got:', e.got, '\n');
+            if (e.expected !== undefined)
+                console.error('expected:', e.expected, 'got:', e.got, '\n');
 
             delete e.expected;
             delete e.got;
@@ -36,5 +41,5 @@ const tester = module.exports = {
             if (e.message !== 'failed test') console.error(e);
         }
     },
-    describe: (msg, f) => (console.log('\n' + msg), f()),
-};
+    describe: (msg, f) => (console.log('\n' + msg), f())
+});

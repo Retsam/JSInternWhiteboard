@@ -1,9 +1,5 @@
 const memoize = require('../questions/02-memoize');
-const {
-    it,
-    assert,
-    describe
-} = require('../tester');
+const { it, assert, describe } = require('../tester');
 
 describe('memoize', () => {
     it('should call a 0 arg function once', () => {
@@ -38,9 +34,8 @@ describe('memoize', () => {
     });
 
     it('should return a function that computes the result of another function', () => {
-
         let i = 0;
-        const increment = (x) => {
+        const increment = x => {
             i += x;
             return i;
         };
@@ -57,9 +52,8 @@ describe('memoize', () => {
     });
 
     it('should return a function that computes the result of another function once per input value', () => {
-
         let i = 0;
-        const increment = (x) => {
+        const increment = x => {
             i += x;
             return i;
         };
