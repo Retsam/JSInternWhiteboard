@@ -25,10 +25,10 @@ describe('memoize', () => {
             return callCount;
         };
 
-        const memoizeFunc = memoize(func);
+        const memoizedFunc = memoize(func);
 
-        const first = memoizeFunc();
-        const second = memoizeFunc();
+        const first = memoizedFunc();
+        const second = memoizedFunc();
 
         assert.equal(first, 1);
         assert.equal(second, 1);
