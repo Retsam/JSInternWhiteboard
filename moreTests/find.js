@@ -1,7 +1,7 @@
 const find = require('../questions/find');
 const { it, assert, describe } = require('../tester');
 
-const isBiggerThanTwo = (x) => {
+const isBiggerThanTwo = x => {
     return x > 2;
 };
 
@@ -18,4 +18,3 @@ describe('find', () => {
         assert.equal(result, undefined);
     });
 });
-

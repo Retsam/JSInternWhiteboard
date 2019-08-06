@@ -1,14 +1,18 @@
 {
-  "name": "interview",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.html",
-  "author": "",
-  "license": "ISC",
-  "scripts": {
-    "build": "parcel index.html"
-  },
-  "dependencies": {
-    "parcel-bundler": "^1.6.2"
-  }
+    "name": "interview",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.html",
+    "author": "",
+    "license": "ISC",
+    "scripts": {
+        "build": "parcel index.html",
+        "format": "prettier '**/*.js' --write",
+        "format:watch": "chokidar '**/*.js' -c 'npm run format'"
+    },
+    "dependencies": {
+        "chokidar-cli": "^2.0.0",
+        "parcel-bundler": "^1.6.2",
+        "prettier": "^1.18.2"
+    }
 }
